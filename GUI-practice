@@ -1,0 +1,56 @@
+import tkinter as tk
+
+def create_display(root):
+    """Create and place the display entry widget."""
+    display = tk.Entry(root, font=('Arial', 20), justify='right')
+    display.grid(row=0, column=0, columnspan=5, sticky="nsew")
+    return display
+
+def create_buttons(root, buttons):
+    """Create and place the buttons in the grid."""
+    row_val, col_val = 1, 0
+    for button in buttons:
+        btn = tk.Button(root, text=button, font=('Arial', 20), padx=20, pady=20)
+        btn.grid(row=row_val, column=col_val, sticky="nsew")
+        col_val += 1
+        if col_val > 4:
+            col_val = 0
+            row_val += 1
+
+def configure_grid(root):
+    """Configure the grid to expand properly."""
+    for i in range(5):
+        root.grid_columnconfigure(i, weight=1)
+    for i in range(6):
+        root.grid_rowconfigure(i, weight=1)
+
+def main():
+    """Main function to create the calculator layout."""
+    # Create the main window
+    root = tk.Tk()
+    root.title("Calculator")
+
+    # Create the display
+    display = create_display(root)
+
+    # Define the buttons
+    buttons = [
+        'AC', 'x²', '√x', 'sin', 'arcsin',
+        '7', '8', '9', 'cos', 'arccos',
+        '4', '5', '6', 'tan', 'arctan',
+        '1', '2', '3', '+', '-',
+        'Exit', '0', '=', 'x', '÷',
+    ]
+
+    # Create and place the buttons
+    create_buttons(root, buttons)
+
+    # Configure the grid
+    configure_grid(root)
+
+    # Start the main loop
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
+
